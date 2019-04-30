@@ -97,18 +97,18 @@ void cadastrar_receita(t_lista *lista){
 	receita_CR->quant_ingredientes = 0;
 	
 	
-//  ADICIONANDO OS INGREDIENTES À RECEITA_CR =================================================== 
+//  ADICIONANDO OS INGREDIENTES Ã€ RECEITA_CR =================================================== 
 	int adc_ingredientes = 404;
 	do {
 		
 		t_ingrediente *ingrediente_CR = (t_ingrediente *) calloc(1, sizeof(t_ingrediente));
 		
 		fflush(stdin);
-		printf("\n\tInforma o nome do Ingrediente:\n");
+		printf("\n\tInforme o nome do Ingrediente:\n");
 		while ((letra = getchar()) != '\n')
 		{
-			//receita_CR->pri_ingrediente-> = (char *) realloc(receita_CR->nome, ++tamanho_nome * sizeof(char));
-			//receita_CR->nome[tamanho_nome - 1] = letra;
+			ingrediente_CR->nome = (char *) realloc(ingrediente_CR->nome, ++tamanho_nome * sizeof(char));
+			ingrediente_CR->nome[tamanho_nome - 1] = letra;
 		}
 		
 	} while(adc_ingredientes != 0);
