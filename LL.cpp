@@ -52,7 +52,7 @@ int main() {
 	{
 		switch(opcao = exibir_menu())
 		{
-			case 1:	
+			case 2:	
 				cadastrar_receita(lista);
 					break;
 		}
@@ -63,23 +63,28 @@ int main() {
 	
 //	TESTES
 	
-	printf("\n\n\tPRIMEIRA RECEITA: %s", lista->pri_receita->nome);
-	printf("\n\tPRIMEIRO INGREDIENTE: %s", lista->pri_receita->pri_ingrediente->nome);	
-	printf("\n\tSEGUNDO INGREDIENTE: %s", lista->pri_receita->pri_ingrediente->prox_ingrediente->nome);
+	printf("\n\n\t1a RECEITA: %s\n", lista->pri_receita->nome);
+	printf("\n\t\tINGREDIENTE: - %s", lista->pri_receita->pri_ingrediente->nome);	
+	printf("\n\t\tINGREDIENTE: - %s", lista->pri_receita->pri_ingrediente->prox_ingrediente->nome);
+	
+	printf("\n\n\t2a RECEITA: %s\n", lista->pri_receita->prox_receita->nome);
+	printf("\n\t\tINGREDIENTE: - %s", lista->pri_receita->prox_receita->pri_ingrediente->nome);	
+	printf("\n\t\tINGREDIENTE: - %s", lista->pri_receita->prox_receita->pri_ingrediente->prox_ingrediente->nome);
 	
 	return 0;
 }
 
 int exibir_menu(void){
 	int opcao;
-
-	printf("\n\t1 - Cadastrar Receita\n");
-	printf("\n\t3 - Listar Receitas\n");
-	printf("\n\tOpcao:");
+	
+	printf("\n\n\n\t=====-   MENU   -=====\n");
+	printf("\n\t1 - Listar Receitas  =\n");
+	printf("\n\t2 - Inserir Receita  =\n");
+	printf("\n\t0 - Sair             =\n");
+	printf("\n\tOpcao:	             =\n\t- ");
 	
 	scanf("%d", &opcao);
-	printf("\n");
-
+	printf("\n\t-=====================\n");		
 	return (opcao);
 }
 
@@ -92,7 +97,7 @@ void cadastrar_receita(t_lista *lista){
 	int tamanho_nome = 0;
 	
 	fflush(stdin);
-	printf("\n\tInforma o nome da receita:\n\n");
+	printf("\n\n\tInforma o nome da receita:	\n\t-");
 	while ((letra = getchar()) != '\n')
 	{
 		
@@ -115,7 +120,7 @@ void cadastrar_receita(t_lista *lista){
 		char letra2;
 		int tamanho_nome2 = 0;
 		
-		printf("\n\tInforma 1 para adcionar mais um ingrediente, 0 para finalizar.\n");
+		printf("\n\tInforma 1 para adcionar mais um ingrediente, 0 para finalizar.	\n\t-");
 		scanf("%d", &adc_ingredientes);
 		
 		if(adc_ingredientes == 1){
@@ -123,7 +128,7 @@ void cadastrar_receita(t_lista *lista){
 			t_ingrediente *ingrediente_CR = (t_ingrediente *) calloc(1, sizeof(t_ingrediente));
 			
 			fflush(stdin);
-			printf("\n\tInforma o nome do Ingrediente:\n");
+			printf("\n\tInforma o nome do Ingrediente:	\n\t-");
 			while ((letra2 = getchar()) != '\n')
 			{
 				ingrediente_CR->nome = (char *) realloc(ingrediente_CR->nome, ++tamanho_nome2 * sizeof(char));
@@ -183,7 +188,7 @@ void cadastrar_receita(t_lista *lista){
 		}
 		
 		int opin;
-		printf("\n\tEm qual posicao voce deseja inserir?\n");
+		printf("\n\tEm qual posicao voce deseja inserir?	\n\t-");
 		scanf("%d", &opin);
 		
 		int j;
@@ -219,17 +224,3 @@ void cadastrar_receita(t_lista *lista){
 	lista->quant_receitas++;
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
