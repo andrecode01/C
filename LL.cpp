@@ -18,6 +18,7 @@ struct receita
 	char *nome;
 	t_receita *prox_receita;
 	t_ingrediente *pri_ingrediente;
+	t_ingrediente *temp;
 	int quant_ingredientes;
 		
 };
@@ -27,7 +28,7 @@ struct lista
 	t_receita *pri_receita;
 	t_receita *temp;
 	int quant_receitas;
-	int quant_ingredientes;	
+//	int quant_ingredientes;	
 };
 typedef struct lista t_lista;
 
@@ -42,7 +43,7 @@ int main() {
 	lista->pri_receita = NULL;
 	lista->temp = NULL;
 	lista->quant_receitas = 0;
-	lista->quant_ingredientes = 0;
+//	lista->quant_ingredientes = 0;
 	
 
 //	< MENU > ===========================
@@ -59,6 +60,12 @@ int main() {
 	
 	
 	
+	
+//	TESTES
+	
+	printf("\n\n\tPRIMEIRA RECEITA: %s", lista->pri_receita->nome);
+	printf("\n\tPRIMEIRO INGREDIENTE: %s", lista->pri_receita->pri_ingrediente->nome);	
+	printf("\n\tSEGUNDO INGREDIENTE: %s", lista->pri_receita->pri_ingrediente->prox_ingrediente->nome);
 	
 	return 0;
 }
@@ -85,36 +92,131 @@ void cadastrar_receita(t_lista *lista){
 	int tamanho_nome = 0;
 	
 	fflush(stdin);
-	printf("\n\tInforma o nome da receita:\n");
+	printf("\n\tInforma o nome da receita:\n\n");
 	while ((letra = getchar()) != '\n')
 	{
+		
 		receita_CR->nome = (char *) realloc(receita_CR->nome, ++tamanho_nome * sizeof(char));
 		receita_CR->nome[tamanho_nome - 1] = letra;
+		
 	}
+	fflush(stdin);
 	
 	receita_CR->prox_receita = NULL;
 	receita_CR->pri_ingrediente = NULL;
+	receita_CR->temp = NULL;
 	receita_CR->quant_ingredientes = 0;
 	
 	
-//  ADICIONANDO OS INGREDIENTES À RECEITA_CR =================================================== 
-	int adc_ingredientes = 404;
+//  ADICIONANDO OS INGREDIENTES A RECEITA_CR =================================================== 
+	int adc_ingredientes = 1;
 	do {
 		
-		t_ingrediente *ingrediente_CR = (t_ingrediente *) calloc(1, sizeof(t_ingrediente));
+		char letra2;
+		int tamanho_nome2 = 0;
 		
-		fflush(stdin);
-		printf("\n\tInforme o nome do Ingrediente:\n");
-		while ((letra = getchar()) != '\n')
-		{
-			ingrediente_CR->nome = (char *) realloc(ingrediente_CR->nome, ++tamanho_nome * sizeof(char));
-			ingrediente_CR->nome[tamanho_nome - 1] = letra;
+		printf("\n\tInforma 1 para adcionar mais um ingrediente, 0 para finalizar.\n");
+		scanf("%d", &adc_ingredientes);
+		
+		if(adc_ingredientes == 1){
+		
+			t_ingrediente *ingrediente_CR = (t_ingrediente *) calloc(1, sizeof(t_ingrediente));
+			
+			fflush(stdin);
+			printf("\n\tInforma o nome do Ingrediente:\n");
+			while ((letra2 = getchar()) != '\n')
+			{
+				ingrediente_CR->nome = (char *) realloc(ingrediente_CR->nome, ++tamanho_nome2 * sizeof(char));
+				ingrediente_CR->nome[tamanho_nome2 - 1] = letra2;
+			}
+			fflush(stdin);
+			
+			ingrediente_CR->prox_ingrediente = NULL;
+			
+			if(receita_CR->quant_ingredientes == 0){
+				
+				receita_CR->pri_ingrediente = ingrediente_CR;
+				receita_CR->temp = ingrediente_CR;
+				receita_CR->quant_ingredientes++;
+				
+			} else{
+				
+				receita_CR->temp->prox_ingrediente = ingrediente_CR;
+				receita_CR->temp = ingrediente_CR;
+				receita_CR->quant_ingredientes++;
+				
+			}
+			
 		}
 		
+		
+	
 	} while(adc_ingredientes != 0);
 	
 	
+//  ADICIONANDO A RECEITA NA LISTA ===================================================
+	if(lista->quant_receitas == 0){
+		
+		lista->pri_receita = receita_CR;
+		lista->temp = receita_CR;
+		
+		} else {
+		
+		if(lista->quant_receitas > 0){
+			
+			int cont = 0;
+			printf("\n\tLugares disponiveis:\n");
+			lista->temp = lista->pri_receita;
+			
+			do {
+				
+				printf("\n\t%d <- Posicao\n", cont);
+				printf("\n\t %do| Nome: %s\n", cont+1, lista->temp->nome);
+				
+				cont++;
+				
+				if(cont < lista->quant_receitas)
+				lista->temp = lista->temp->prox_receita;
+				
+			} while (lista->quant_receitas > cont);
+			printf("\n\t%d <- Posicao\n", cont);	
+		}
+		
+		int opin;
+		printf("\n\tEm qual posicao voce deseja inserir?\n");
+		scanf("%d", &opin);
+		
+		int j;
+		
+		if(opin == 0){
+			
+			lista->temp = lista->pri_receita;
+			lista->pri_receita = receita_CR;
+			lista->pri_receita->prox_receita = lista->temp;	
+			
+		} else {
+		
+		for(j = 0; j < opin; j++){
+			
+			if(j == 0)
+			
+			lista->temp = lista->pri_receita;
+			
+			else{
+				
+				lista->temp = lista->temp->prox_receita;
+				
+			}
+			
+		}
+		
+		receita_CR->prox_receita = lista->temp->prox_receita;
+		lista->temp->prox_receita = receita_CR;
+		
+		}
+	}
 	
+	lista->quant_receitas++;
 	
 }
 
