@@ -20,6 +20,7 @@ struct receita
 	t_ingrediente *pri_ingrediente;
 	t_ingrediente *temp;
 	int quant_ingredientes;
+	int codigo;
 		
 };
 
@@ -28,7 +29,7 @@ struct lista
 	t_receita *pri_receita;
 	t_receita *temp;
 	int quant_receitas;
-//	int quant_ingredientes;	
+	int ai_codigos;
 };
 typedef struct lista t_lista;
 
@@ -36,14 +37,16 @@ int exibir_menu(void);
 
 void cadastrar_receita(t_lista *lista);
 
+void listar(t_lista *lista);
+
 int main() {
 	
 //	CRIANDO A < LISTA > ====================================
 	t_lista *lista = (t_lista *) calloc(1, sizeof(t_lista));
+	lista->ai_codigos = 0;
 	lista->pri_receita = NULL;
 	lista->temp = NULL;
 	lista->quant_receitas = 0;
-//	lista->quant_ingredientes = 0;
 	
 
 //	< MENU > ===========================
@@ -52,6 +55,9 @@ int main() {
 	{
 		switch(opcao = exibir_menu())
 		{
+			case 1:
+				listar(lista);
+					break;
 			case 2:	
 				cadastrar_receita(lista);
 					break;
@@ -63,11 +69,11 @@ int main() {
 	
 //	TESTES
 	
-	printf("\n\n\t1a RECEITA: %s\n", lista->pri_receita->nome);
+	printf("\n\n\tCodigo: %d | RECEITA: %s\n", lista->pri_receita->codigo, lista->pri_receita->nome);
 	printf("\n\t\tINGREDIENTE: - %s", lista->pri_receita->pri_ingrediente->nome);	
 	printf("\n\t\tINGREDIENTE: - %s", lista->pri_receita->pri_ingrediente->prox_ingrediente->nome);
 	
-	printf("\n\n\t2a RECEITA: %s\n", lista->pri_receita->prox_receita->nome);
+	printf("\n\n\tCodigo: %d | RECEITA: %s\n", lista->pri_receita->prox_receita->codigo, lista->pri_receita->prox_receita->nome);
 	printf("\n\t\tINGREDIENTE: - %s", lista->pri_receita->prox_receita->pri_ingrediente->nome);	
 	printf("\n\t\tINGREDIENTE: - %s", lista->pri_receita->prox_receita->pri_ingrediente->prox_ingrediente->nome);
 	
@@ -95,6 +101,9 @@ void cadastrar_receita(t_lista *lista){
 	
 	char letra;
 	int tamanho_nome = 0;
+	
+	receita_CR->codigo = 0;
+	receita_CR->codigo = lista->ai_codigos++; 
 	
 	fflush(stdin);
 	printf("\n\n\tInforma o nome da receita:	\n\t-");
@@ -224,3 +233,28 @@ void cadastrar_receita(t_lista *lista){
 	lista->quant_receitas++;
 	
 }
+
+void listar(t_lista *lista){
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
