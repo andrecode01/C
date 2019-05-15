@@ -22,6 +22,8 @@ typedef struct arvore t_arvore;
 
 void inserir_nos(t_arvore *arvore);
 
+int busca(t_arvore *arvore);
+
 int exibir_menu(void);
 
 
@@ -46,10 +48,6 @@ int main(int argc, char** argv) {
 	} while (opcao != 0);
 	
 	printf("\n\tID da Raiz: %d", arvore->raiz->no_id);
-	
-	printf("\n\tID da Raiz->Esq: %d", arvore->raiz->no_esq->no_id);
-	
-	printf("\n\tID da Raiz->Dir: %d", arvore->raiz->no_dir->no_id);
 
 	return 0;
 }
@@ -75,35 +73,28 @@ void inserir_nos(t_arvore *arvore){
 	
 	no_bot->no_esq = NULL;
 	no_bot->no_dir = NULL;
+
+
 	
-	if(arvore->altura == 0){
+	if(arvore->raiz == NULL){
 		
 		arvore->raiz = no_bot;
-		arvore->qtd_nos++;
-		
-		arvore->no_temp = arvore->raiz;
-		
+		arvore->qtd_nos++;	
 		arvore->altura++;
-		
-	} else{
-			
-			if(arvore->qtd_nos == (2^arvore->altura) - 1){
-				
-				arvore->no_temp = arvore->no_temp->no_esq;
-				
-			} else{
-				
-				if(arvore->qtd_nos % 2 == 0){
-					
-					arvore->no_temp->no_esq = no_bot;
-					
-				} else{
-					
-					arvore->no_temp->no_dir = no_bot;
-					
-				}
-				
-			}
-						
-		} 	
+
+		arvore->no_temp = arvore->raiz;
+
+	} 
+  else{
+
+    do{
+
+    }while()
+
+  }				
+}
+
+int busca(t_arvore *arvore){
+
+
 }
