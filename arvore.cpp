@@ -20,9 +20,9 @@ struct arvore{
 };
 typedef struct arvore t_arvore;
 
-void inserir_nos(t_arvore *arvore);
+void inserir_nos(t_arvore *arvore, int valorB);
 
-int busca(t_arvore *arvore);
+int busca(t_arvore *arvore, int valorB);
 
 int exibir_menu(void);
 
@@ -35,14 +35,14 @@ int main(int argc, char** argv) {
 	arvore->raiz = NULL;
 	arvore->no_temp = NULL;
 	
-	int opcao;
+	int opcao, valorB;
 	
 	do
 	{
 		switch(opcao = exibir_menu())
 		{
 			case 1:	
-				inserir_nos(arvore);
+				inserir_nos(arvore, valorB);
 				break;
 		}
 	} while (opcao != 0);
@@ -64,7 +64,7 @@ int exibir_menu(void){
 	return (opcao);
 }
 
-void inserir_nos(t_arvore *arvore){
+void inserir_nos(t_arvore *arvore, int valorB){
 	
 	t_no *no_bot = (t_no *) calloc(1, sizeof(t_no));
 	
@@ -87,14 +87,28 @@ void inserir_nos(t_arvore *arvore){
 	} 
   else{
 
+    arvore->no_temp = arvore->raiz;
+
+    int valorBtemp;
+
+    valorB = no_bot->no_id;
+
     do{
 
-    }while()
+      valorBtemp = busca(arvore, valorB);
+
+    }while(valorBtemp != 0);
 
   }				
 }
 
-int busca(t_arvore *arvore){
+int busca(t_arvore *arvore, int valorB){
+
+  if(valorB > arvore->no_temp->no_id){
+
+    
+
+  }
 
 
 }
