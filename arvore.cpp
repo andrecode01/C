@@ -22,6 +22,8 @@ typedef struct arvore t_arvore;
 
 void inserir_nos(t_arvore *arvore, int valorB);
 
+void excluir_nos();
+
 int busca(t_arvore *arvore, int valorB);
 
 int exibir_menu(void);
@@ -43,6 +45,9 @@ int main(int argc, char** argv) {
 		{
 			case 1:	
 				inserir_nos(arvore, valorB);
+				break;
+			case 2:
+				excluir_nos();
 				break;
 		}
 	} while (opcao != 0);
@@ -148,6 +153,20 @@ int busca(t_arvore *arvore, int valorB){
 	}
 }
 
+void excluir_nos(){
+	
+/*
+	SEM FILHOS == REMOVER;
+	
+	UM FILHO == REMOVER O PAI E COLOCAR O FILHO NO LUGAR;
+	
+	DOIS FILHOS == 
+		SUBSTITUIR PELO MAIOR NÓ DA ESQUERDA; || 
+		SUBSTITUIR PELO MENOR NÓ DA DIREITA; EM SEGUIDA >
+		EXCLUIR O NÓ USADO PARA SUBSTITUIR;
+*/
+	
+}
 
 
 
