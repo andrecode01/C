@@ -17,14 +17,19 @@ struct arvore{
 	int qtd_nos;
 	t_no *raiz;
 	t_no *no_temp;
+	t_no *no_temp2;
+	t_no *no_temp3;
+	
 };
 typedef struct arvore t_arvore;
 
 void inserir_nos(t_arvore *arvore, int valorB);
 
-void excluir_nos();
+void excluir_nos(t_arvore *arvore, int valorB);
 
-int busca(t_arvore *arvore, int valorB);
+int busca_inc(t_arvore *arvore, int valorB);
+
+int busca_exc(t_arvore *arvore, int valorB);
 
 int exibir_menu(void);
 
@@ -36,6 +41,8 @@ int main(int argc, char** argv) {
 	arvore->qtd_nos = 0;
 	arvore->raiz = NULL;
 	arvore->no_temp = NULL;
+	arvore->no_temp2 = NULL;
+	arvore->no_temp3 = NULL;
 	
 	int opcao, valorB;
 	
@@ -47,19 +54,17 @@ int main(int argc, char** argv) {
 				inserir_nos(arvore, valorB);
 				break;
 			case 2:
-				excluir_nos();
+				excluir_nos(arvore, valorB);
 				break;
 		}
 	} while (opcao != 0);
 	
-	printf("\n\tID da Raiz: %d", arvore->raiz->no_id);
-	printf("\n\tID da RaizDIR: %d", arvore->raiz->no_dir->no_id);
-	printf("\n\tID da RaizESQ: %d", arvore->raiz->no_esq->no_id);
-	
-	printf("\n\tID da RaizDIR-FILHO-DIR %d", arvore->raiz->no_dir->no_dir->no_id);
-
-	
-	
+	printf("\n=======%d\n", arvore->raiz->no_id);
+	printf("=====%d", arvore->raiz->no_esq->no_id);
+	printf("=======  ==%d\n", arvore->raiz->no_dir->no_id);
+	printf("\t\t\t%d", arvore->raiz->no_esq->no_esq->no_id);
+	printf("=======  ==  %d\n", arvore->raiz->no_dir->no_dir->no_id);
+	printf("=======  %d", arvore->raiz->no_dir->no_dir->no_esq->no_id);
 	
 
 	return 0;
@@ -69,6 +74,7 @@ int exibir_menu(void){
 	int opcao;
 
 	printf("\n\t1 - Inserir No\n");
+	printf("\n\t2 - Excluir No\n");
 	printf("\n\tOpcao:");
 	
 	scanf("%d", &opcao);
@@ -81,7 +87,7 @@ void inserir_nos(t_arvore *arvore, int valorB){
 	
 	t_no *no_bot = (t_no *) calloc(1, sizeof(t_no));
 	
-	printf("\n\tInserir ID do no:");
+	printf("\n\tInserir ID do No:");
 	scanf("%d", &no_bot->no_id);
 	
 	no_bot->no_esq = NULL;
@@ -108,7 +114,7 @@ void inserir_nos(t_arvore *arvore, int valorB){
 
     do{
 
-      valorBtemp = busca(arvore, valorB);
+      valorBtemp = busca_inc(arvore, valorB);
 	  
 	  if(valorBtemp == 1){
 	  	
@@ -130,7 +136,7 @@ void inserir_nos(t_arvore *arvore, int valorB){
   }				
 }
 
-int busca(t_arvore *arvore, int valorB){
+int busca_inc(t_arvore *arvore, int valorB){
 
 	if(valorB > arvore->no_temp->no_id){
 		
@@ -153,7 +159,7 @@ int busca(t_arvore *arvore, int valorB){
 	}
 }
 
-void excluir_nos(){
+void excluir_nos(t_arvore *arvore, int valorB){
 	
 /*
 	SEM FILHOS == REMOVER;
@@ -164,13 +170,42 @@ void excluir_nos(){
 		SUBSTITUIR PELO MAIOR NÓ DA ESQUERDA; || 
 		SUBSTITUIR PELO MENOR NÓ DA DIREITA; EM SEGUIDA >
 		EXCLUIR O NÓ USADO PARA SUBSTITUIR;
-*/
+*/	
+
+	
+	
+	printf("\n\tExcluir No com ID:");
+	scanf("%d", &valorB);
+	
+	
+	if(arvore->raiz->no_id == valorB){
+		
+		if(arvore->raiz->no_dir == NULL && arvore->raiz->no_dir == NULL){
+			arvore->raiz = NULL;
+			arvore->qtd_nos--;
+			valorB = 0;
+		}
+		
+	}
+	
+	
+
+    int valorBtemp;
+
+    do{
+    	
+    	
+    	
+	    
+    }while(valorBtemp != 0);
+	
 	
 }
 
+int busca_exc(t_arvore *arvore, int valorB){
 
-
-
-
-
-
+	
+	
+	
+	
+}
