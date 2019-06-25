@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int expo(int alt){
+	
+	int exp = 1, i;
+	
+	for(i = 0; i < alt; i++)
+	exp *= 2;
+	
+	return exp;
+	
+}
+
+
+int main(int argc, char** argv) {
+	
+	int i, eq, alt =1, qtd = 0;
+	
+	for(i = 0; i < 50; i++){
+		
+		qtd++;
+		eq = 0;
+		
+		eq = expo(alt) - 1;
+		
+		if(eq == qtd){
+			printf("\nQtd: %d", qtd);
+			printf("\nBalanceado\n");
+			alt++;
+		}
+		
+	}
+	
+	
+	return 0;
+}
+
+//temp = raiz
+//
+//if temp->esq null
+//null = NOVO
+//else if temp->dir null
+//null = NOVO
+//else temp = temp->esq
+// ALTURA 	#LOOP (QUANTIDADE DE PULOS) RETURN(CAMADA DO PAI PARA INSERIR)
+// QUANT 	#LOOP (QUANTIDADE DE NOS) RETURN(NO NULL PARA INSERIR)
+
+
+
+
+
+
+
+
+
+
+
+
+
